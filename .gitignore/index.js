@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 var bot = new Discord.Client();
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
-
+var YoutubeStream = require('youtube-audio-stream')
 const adapters = new FileSync('database.json')
 const db = low(adapters);
 
@@ -29,17 +29,17 @@ bot.on('message', message => {
         if(splitMessage[0] === "/play"){
             if(splitMessage.length === 2){
                 if(message.member.voiceChannel){
-                    message.member.voiceChannel.join().then(connexion => {
-                        dispatcher = connexion.playArbitraryInput(splitMessage[1]);
-
-                        dispatcher.on('error', e=> {
-                            console.log("e")
-                        });
-
-                        dispatcher.on('end', e=>{
-                            console.log("Fin du son")
-                        });
-                    }).catch(console.log)
+                    let voiceChannel = message.member.voiceChannel
+                    
+                    voiceChannel
+                        .join()
+                        .then(function (connection) {
+                            let stream = YoutubeStream(splitMessage[1])
+                            connection.playStream(stream).on('end', function() {
+                                connection.disconnect()
+                            })
+                        })
+                    
                 }else{
                     message.reply("Vous n'etes pas connécté a un salon vocal")
                 }
