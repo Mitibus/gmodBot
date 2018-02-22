@@ -27,7 +27,7 @@ bot.on('message', message => {
     if(message.content[0] === PREFIXE){
         let splitMessage = message.content.split(" ");
         if(splitMessage[0] === "/play"){
-            if(splitMessage.lenght === 2){
+            if(splitMessage.length === 2){
                 if(message.member.voiceChannel){
                     message.member.voiceChannel.join().then(connexion => {
                         dispatcher = connexion.playArbitraryInput(splitMessage[1]);
