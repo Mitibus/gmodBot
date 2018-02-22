@@ -1,0 +1,13 @@
+{
+  "name": "",
+  "version": "",
+  "dependencies": {
+    "discord.js": "^11.3.0",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-binaries": "^3.2.2-3",
+    "lowdb": "^1.0.0",
+    "opusscript": "0.0.6",
+    "tar": "^4.4.0",
+    "tar.gz": "^1.0.7"
+  }
+}
