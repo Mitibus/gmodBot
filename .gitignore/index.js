@@ -34,8 +34,7 @@ bot.on('message', message => {
                     voiceChannel
                         .join()
                         .then(function (connection) {
-                            let stream = YoutubeStream(splitMessage[1])
-                            connection.playStream(stream).on('end', function() {
+                            connection.playStream(YoutubeStream(splitMessage[1])).on('end', function() {
                                 connection.disconnect()
                             })
                         })
