@@ -30,7 +30,7 @@ bot.on('message', message => {
             if(splitMessage.length === 2){
                 if(message.member.voiceChannel){
                     message.member.voiceChannel.join().then(connexion => {
-                        dispatcher = connexion.playArbitraryInput(splitMessage[1]);
+                        dispatcher = connexion.playBroadcast(splitMessage[1]);
 
                         dispatcher.on('error', e=> {
                             console.log("e")
