@@ -8,7 +8,7 @@ const db = low(adapters);
 
 db.defaults({histoire: [], xp: []}).write();
 
-
+var dispatcher;
 const PREFIXE = "/";
 var version = Discord.version;
 var randNum = 0;
@@ -23,6 +23,31 @@ bot.on('ready', function(){
 
 
 bot.on('message', message => {
+    
+    if(message.content[0] === PREFIXE){
+        let splitMessage = message.content.split(" ");
+        if(splitMessage[0] === "/play"){
+            if(splitMessage.lenght === 2){
+                if(message.member.voiceChannel){
+                    message.member.voiceChannel.join().then(connexion => {
+                        dispatcher = connexion.playArbitraryInput(splitMessage[1]);
+
+                        dispatcher.on('error', e=> {
+                            console.log("e")
+                        });
+
+                        dispatcher.on('end', e=>{
+                            console.log("Fin du son")
+                        });
+                    }).catch(console.log)
+                }else{
+                    message.reply("Vous n'etes pas connécté a un salon vocal")
+                }
+            }else{
+                message.reply("Absence de paramètre !")
+            }
+        }
+    }
 
     var msgauthor = message.author.id;
 
@@ -146,7 +171,7 @@ bot.on('message', message => {
     }
 
     if(message.content === PREFIXE + "location"){
-        
+
     }
 
 }) 
