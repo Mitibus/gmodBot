@@ -192,4 +192,4 @@ bot.on('guilMemberAdd', member => {
 
 
 
-bot.login("Mzk4ODA0MjM2MDIxNzkyNzY5.DW2dgg.h34yq2zXtbCVXBef6OdUHX2JRpk");
+bot.login("");
